@@ -16,27 +16,14 @@ app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'public/index.html'));
 });
 
-var messages = [];
-
 io.on('connection', (socket) => {
-  let connectionMessage = { user: socket.id, message: "Connected to the server" };
-  messages.push(connectionMessage);
-  socket.on('chat message', (msg) => {
-    let userMessage = { user: socket.id, message: msg };
-    messages.push(userMessage);
-  });
-});
-
-io.on('disconnection', (socker) => {
-    let disconnectionMessage = { user: socket.id, message: "Disconnected to the server" };
-  messages.push(disconnectionMessage);
-
+console.log(`Socket ${socket.id} has been connected`)
 })
 
-
 function update() {
-  io.emit('updateMessages', messages);
+
 }
+
 setInterval(update, 15);
 
 server.listen(3000, () => {
