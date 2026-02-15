@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log(`Socket ${socket.id} has been connected`);
+  socket.on("disconnect", (reason) => {
+      console.log(`Socket ${socket.id} has been disconnected: ${reason}`);
+  })
 });
 
 function update() {}
