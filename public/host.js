@@ -22,30 +22,24 @@ function hostLobby(response) {
 	document.getElementById("lobbyCode").innerHTML = localHostedLobby.name;
 	console.log(`Lobby hosted successfully: ${localHostedLobby.name}`);
 	updateLobby();
-	startUpdatePlayersTable();
 }
 
 function updateLobby() {
 	socket.on("update-players", (players) => {
 		localHostedLobby.players = players;
+		updateTable();
 	});
 }
-
-function startUpdatePlayersTable() {
+function updateTable() {
 	const tableElement = document.getElementById("playersTableBody");
-
-	setInterval(updateTable, 1000);
-
-	function updateTable() {
-		let table = "";
-		let i = 1;
-		for (let player in localHostedLobby.players) {
-			table += `<tr>
+	let table = "";
+	let i = 1;
+	for (const player of localHostedLobby.players) {
+		table += `<tr>
 			<td scope="col">${i}</td>
 			<td scope="col">${player.name}</td>
 			</tr>`;
-			i++;
-		}
-		tableElement.innerHTML = table;
+		i++;
 	}
+	tableElement.innerHTML = table;
 }

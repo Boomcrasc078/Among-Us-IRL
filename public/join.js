@@ -1,5 +1,3 @@
-import generateGUID from "../GUID.js";
-
 const socket = io();
 
 let localPlayer = {
@@ -27,20 +25,19 @@ function joinLobby() {
 
 	getPlayerName();
 
-	setPlayerId();
-
+	
 	socket
-		.timeout(5000)
-		.emit("join-lobby", localJoinedLobby.name, localPlayer, (err, response) => {
-			if (err) {
-				console.log(`Error joining lobby: ${err}`);
-			} else if (response.status) {
-				console.log(`Joined lobby successfully: ${response.lobbyName}`);
-			} else {
-				console.log(`Failed to join lobby: ${response.message}`);
-				errorScreen(true, response.message);
-			}
-		});
+	.timeout(5000)
+	.emit("join-lobby", localJoinedLobby.name, localPlayer, (err, response) => {
+		if (err) {
+			console.log(`Error joining lobby: ${err}`);
+		} else if (response.status) {
+			console.log(`Joined lobby successfully: ${response.lobbyName}`);
+		} else {
+			console.log(`Failed to join lobby: ${response.message}`);
+			errorScreen(true, response.message);
+		}
+	});
 
 	loadingScreen(false);
 }
@@ -53,11 +50,6 @@ function getLobbyCode() {
 function getPlayerName() {
 	const playerNameInput = document.getElementById("nameInput").value;
 	localPlayer.name = playerNameInput;
-}
-
-function setPlayerId() {
-	localPlayer.id = generateGUID();
-	localStorage.setItem("player-id", localPlayer.id);
 }
 
 function loadingScreen(enable, message) {
@@ -79,6 +71,3 @@ function errorScreen(enable, message) {
 		errorTextElement.textContent = "";
 	}
 }
-
-// Make joinLobby function globally accessible
-window.joinLobby = joinLobby;
