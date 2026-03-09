@@ -24,13 +24,8 @@
 		<script src="theme.js"></script>
 		<main>
 			<div id="joinLobbyMenu" style="display: none">
-				<div
-					id="joinLobbyContainer"
-					class="container d-flex flex-column justify-content-center"
-				>
-					<div
-						class="mt-5 d-flex flex-column gap-3 bg-body-tertiary p-5 rounded rounded-5"
-					>
+				<div id="joinLobbyContainer" class="container d-flex flex-column justify-content-center">
+					<div class="mt-5 d-flex flex-column gap-3 bg-body-tertiary p-5 rounded rounded-5">
 						<h2 class="text-center">Anslut till spelet</h2>
 						<div class="form-floating mb-3">
 							<input
@@ -56,43 +51,30 @@
 								placeholder="Rumskod"
 							/>
 							<script>
-								document.addEventListener("DOMContentLoaded", function () {
-									document.getElementById("nameInput").value =
-										localStorage.getItem("player-name");
+								document.addEventListener('DOMContentLoaded', function () {
+									document.getElementById('nameInput').value = localStorage.getItem('player-name');
 								});
 							</script>
 							<label for="lobbyCodeInput">Rumskod</label>
 						</div>
 						<p>
-							Ditt namn används endast under spelets gång och kommer att raderas
-							från servern när spelet är slut.
+							Ditt namn används endast under spelets gång och kommer att raderas från servern när
+							spelet är slut.
 						</p>
 						<p>
-							Viss information sparas dock på din enhet för att förbättra
-							spelupplevelsen, men detta går att ta bort i din webbläsares
-							inställningar.
+							Viss information sparas dock på din enhet för att förbättra spelupplevelsen, men detta
+							går att ta bort i din webbläsares inställningar.
 						</p>
 						<div class="form-check">
-							<input
-								class="form-check-input"
-								type="checkbox"
-								value=""
-								id="confirmationCheckbox1"
-							/>
+							<input class="form-check-input" type="checkbox" value="" id="confirmationCheckbox1" />
 							<label class="form-check-label" for="confirmationCheckbox1">
 								Jag godkänner att mitt namn andvänds under spelets gång.
 							</label>
 						</div>
 						<div class="form-check">
-							<input
-								class="form-check-input"
-								type="checkbox"
-								value=""
-								id="confirmationCheckbox2"
-							/>
+							<input class="form-check-input" type="checkbox" value="" id="confirmationCheckbox2" />
 							<label class="form-check-label" for="confirmationCheckbox2">
-								Jag godkänner att data sparas på min enhet för att förbättra
-								spelupplevelsen.
+								Jag godkänner att data sparas på min enhet för att förbättra spelupplevelsen.
 							</label>
 						</div>
 						<button
@@ -123,16 +105,9 @@
 			</div>
 			<div id="error" style="display: none">
 				<div id="errorContainer" class="container">
-					<div
-						class="d-flex flex-column gap-5 position-absolute top-50 start-50 translate-middle"
-					>
-						<h1 id="error-text" class="display-1 text-center">
-							Ett fel uppstod
-						</h1>
-						<button
-							class="btn btn-primary btn-lg rounded rounded-pill"
-							onclick="location.reload()"
-						>
+					<div class="d-flex flex-column gap-5 position-absolute top-50 start-50 translate-middle">
+						<h1 id="error-text" class="display-1 text-center">Ett fel uppstod</h1>
+						<button class="btn btn-primary btn-lg rounded rounded-pill" onclick="location.reload()">
 							Försök igen
 						</button>
 					</div>
@@ -140,34 +115,30 @@
 			</div>
 			<div id="lobby" style="display: none"></div>
 		</main>
+		<script>
+			setInterval(updateJoinButtonEnabled, 100);
+
+			function updateJoinButtonEnabled() {
+				const nameInput = document.getElementById('nameInput');
+				const roomCodeInput = document.getElementById('lobbyCodeInput');
+				const confirmationCheckbox1 = document.getElementById('confirmationCheckbox1');
+				const confirmationCheckbox2 = document.getElementById('confirmationCheckbox2');
+				const joinBtn = document.getElementById('joinBtn');
+
+				if (
+					nameInput.value.trim() !== ''
+					&& roomCodeInput.value.trim() !== ''
+					&& confirmationCheckbox1.checked
+					&& confirmationCheckbox2.checked
+				) {
+					joinBtn.disabled = false;
+				} else {
+					joinBtn.disabled = true;
+				}
+			}
+		</script>
+
+		<script src="loadingScreen.js"></script>
+		<script src="join.js"></script>
 	</body>
 </html>
-
-<script>
-	setInterval(updateJoinButtonEnabled, 100);
-
-	function updateJoinButtonEnabled() {
-		const nameInput = document.getElementById("nameInput");
-		const roomCodeInput = document.getElementById("lobbyCodeInput");
-		const confirmationCheckbox1 = document.getElementById(
-			"confirmationCheckbox1"
-		);
-		const confirmationCheckbox2 = document.getElementById(
-			"confirmationCheckbox2"
-		);
-		const joinBtn = document.getElementById("joinBtn");
-
-		if (
-			nameInput.value.trim() !== ""
-			&& roomCodeInput.value.trim() !== ""
-			&& confirmationCheckbox1.checked
-			&& confirmationCheckbox2.checked
-		) {
-			joinBtn.disabled = false;
-		} else {
-			joinBtn.disabled = true;
-		}
-	}
-</script>
-
-<script src="join.js"></script>
