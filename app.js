@@ -7,8 +7,9 @@ import Lobby from './Lobby.js';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, { connectionStateRecovery: {} });
 const port = 3000;
+const updateInterval = 200;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -31,6 +32,11 @@ server.listen(port, () => {
 });
 
 function onConnection(socket) {
+	if (socket.recovered) {
+		console.log(`Socket ${socket.id} has been reconnected`);
+		return;
+	}
+
 	console.log(`Socket ${socket.id} has been connected`);
 
 	socket.on('disconnect', (reason) => onDisconnection(socket, reason));
@@ -52,7 +58,7 @@ function onHostLobby(socket, callback) {
 	lobbys.push(newLobby);
 	socket.join(newLobby.name);
 	const callbackData = { status: true, lobbyName: newLobby.name };
-	setTimeout(() => callback(callbackData), 1000);
+	callback(callbackData);
 	// console.log(`Socket ${socket.id} has hosted a new lobby`);
 }
 
@@ -81,7 +87,7 @@ function closeLobbysHostedBy(socket) {
 	}
 }
 
-setInterval(updateAllLobbys, 1000);
+setInterval(updateAllLobbys, updateInterval);
 
 function updateAllLobbys() {
 	for (let lobby of lobbys) {

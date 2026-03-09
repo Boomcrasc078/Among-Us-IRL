@@ -2,7 +2,13 @@ const lobbyElement = document.getElementById('lobby');
 
 const socket = io();
 
+socket.on('disconnect', (reason) => onDisconnection(reason));
+
 let localHostedLobby = { name: null, players: [] };
+
+function onDisconnection(reason) {
+	console.log(`You have been disconnected: ${reason}`);
+}
 
 tryHostLobby();
 function tryHostLobby() {
@@ -11,6 +17,7 @@ function tryHostLobby() {
 		loadingScreen(false);
 		if (err) {
 			console.log(`Error hosting lobby: ${err}`);
+			error(true, err);
 		} else {
 			hostLobby(response);
 		}

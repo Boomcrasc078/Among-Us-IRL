@@ -15,13 +15,6 @@
 		/>
 	</head>
 	<body>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-			crossorigin="anonymous"
-		></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="theme.js"></script>
 		<main>
 			<div id="joinLobbyMenu" style="display: none">
 				<div id="joinLobbyContainer" class="container d-flex flex-column justify-content-center">
@@ -113,32 +106,20 @@
 					</div>
 				</div>
 			</div>
-			<div id="lobby" style="display: none"></div>
+			<div id="lobby" style="display: none">
+				
+			</div>
 		</main>
-		<script>
-			setInterval(updateJoinButtonEnabled, 100);
-
-			function updateJoinButtonEnabled() {
-				const nameInput = document.getElementById('nameInput');
-				const roomCodeInput = document.getElementById('lobbyCodeInput');
-				const confirmationCheckbox1 = document.getElementById('confirmationCheckbox1');
-				const confirmationCheckbox2 = document.getElementById('confirmationCheckbox2');
-				const joinBtn = document.getElementById('joinBtn');
-
-				if (
-					nameInput.value.trim() !== ''
-					&& roomCodeInput.value.trim() !== ''
-					&& confirmationCheckbox1.checked
-					&& confirmationCheckbox2.checked
-				) {
-					joinBtn.disabled = false;
-				} else {
-					joinBtn.disabled = true;
-				}
-			}
-		</script>
-
-		<script src="loadingScreen.js"></script>
-		<script src="join.js"></script>
+		<script></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+			crossorigin="anonymous"
+		></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="Components/theme.js"></script>
+		<script src="Components/loadingScreen.js"></script>
+		<script src="Components/error.js"></script>
+		<script src="Player/player.js"></script>
 	</body>
 </html>

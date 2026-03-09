@@ -64,6 +64,16 @@
 					</div>
 				</div>
 			</div>
+			<div id="error" style="display: none">
+				<div id="errorContainer" class="container">
+					<div class="d-flex flex-column gap-5 position-absolute top-50 start-50 translate-middle">
+						<h1 id="error-text" class="display-1 text-center">Ett fel uppstod</h1>
+						<button class="btn btn-primary btn-lg rounded rounded-pill" onclick="location.reload()">
+							Försök igen
+						</button>
+					</div>
+				</div>
+			</div>
 		</main>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -71,8 +81,9 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="theme.js"></script>
-		<script src="loadingScreen.js"></script>
-		<script src="host.js"></script>
+		<script src="Components/theme.js"></script>
+		<script src="Components/loadingScreen.js"></script>
+		<script src="Components/error.js"></script>
+		<script src="Host/host.js"></script>
 	</body>
 </html>
