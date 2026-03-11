@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="background-image"></div>
-		<main>
+		<main class="pt-5">
 			<div id="loading" style="display: none">
 				<div id="connectingContainer" class="container">
 					<div
@@ -40,13 +40,20 @@
 					<div class="d-flex flex-column">
 						<div class="text-center flex-column gap-5">
 							<div>
-								<h2 class="mt-5">Välkommen till</h2>
-								<h1 class="">AMONG US IRL</h1>
+								<h2>Välkommen till</h2>
+								<h1>AMONG US IRL</h1>
 							</div>
 							<div>
-								<h3 class="">Anslut på</h3>
-								<h1 class=>tinyurl.se/amongusirl</h1>
-								<h3 class="">och ange koden:</h3>
+								<h3>Anslut på</h3>
+								<h1 id="joinURL">tinyurl.se/amongusirl</h1>
+								<style>
+									@media (max-width: 770px) {
+										#joinURL {
+											font-size: min(5rem, 13vw);
+										}
+									}
+								</style>
+								<h3>och ange koden:</h3>
 								<h1 id="lobbyCode"></h1>
 							</div>
 						</div>
@@ -57,15 +64,31 @@
 									<span class="visually-hidden">Loading...</span>
 								</div>
 							</div>
-							<table id="playersTable" class="table">
+							<table id="playersTable" class="table table-borderless bg-body-glass">
 								<thead>
-									<tr>
-										<th class="bg-body-glass" scope="col">#</th>
-										<th class="bg-body-glass" scope="col">Namn</th>
+									<tr class="border-1 border-white border-top-0 border-start-0 border-end-0">
+										<th class="bg-transparent" scope="col">#</th>
+										<th class="bg-transparent" scope="col">Namn</th>
 									</tr>
 								</thead>
 								<tbody id="playersTableBody"></tbody>
 							</table>
+						</div>
+						<div class="mt-5">
+							<h3>Spelinställningar</h3>
+							<div class="bg-body-glass p-3 rounded rounded-5">
+								<div class="row">
+									<div class="col">
+										<lavel for="impostor-count-input" class="form-label">Impostors</lavel>
+										<select id="impostor-count-input" class="form-select bg-body-glass" aria-label="Default select example">
+											<option class="bg-black" value="1">1</option>
+											<option class="bg-black" value="2">2</option>
+											<option class="bg-black" value="3">3</option>
+										</select>
+									</div>
+									<div class="col"></div>
+								</div>
+							</div>
 						</div>
 						<div class="mt-5 d-flex flex-column">
 							<button class="btn btn-primary btn-lg rounded rounded-pill" id="startGameBtn">
@@ -92,7 +115,6 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="Components/theme.js"></script>
 		<script src="Components/loadingScreen.js"></script>
 		<script src="Components/error.js"></script>
 		<script src="Host/host.js"></script>

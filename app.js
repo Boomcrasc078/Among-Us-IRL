@@ -66,7 +66,7 @@ function onJoinLobby(socket, lobbyName, player, callback) {
 	const lobby = lobbys.find((lobby) => lobby.name === lobbyName);
 
 	if (!lobby) {
-		callback({ status: false, message: `Kunde inte hitta ett rum med koden: ${lobbyName}` });
+		callback({ status: false, message: `Kunde inte hitta ett spel med koden: ${lobbyName}` });
 		return;
 	}
 

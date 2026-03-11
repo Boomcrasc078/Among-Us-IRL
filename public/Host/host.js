@@ -12,7 +12,7 @@ function onDisconnection(reason) {
 
 tryHostLobby();
 function tryHostLobby() {
-	loadingScreen(true, 'Skapar rum...');
+	loadingScreen(true, 'Skapar spel...');
 	socket.timeout(5000).emit('host-lobby', (err, response) => {
 		loadingScreen(false);
 		if (err) {
@@ -42,8 +42,8 @@ function updateTable() {
 	let i = 1;
 	for (const player of localHostedLobby.players) {
 		table += `<tr>
-			<td class="bg-body-glass" scope="col">${i}</td>
-			<td class="bg-body-glass" scope="col">${player.name}</td>
+			<td class="bg-transparent" scope="col">${i}</td>
+			<td class="bg-transparent" scope="col">${player.name}</td>
 			</tr>`;
 		i++;
 	}
